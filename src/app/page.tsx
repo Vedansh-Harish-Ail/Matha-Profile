@@ -1,4 +1,6 @@
+import { ShieldCheck, Truck, MessageCircle, ArrowRight } from 'lucide-react';
 import Hero from '@/components/sections/Hero';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -29,31 +31,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Categories (Placeholder) */}
-      <section className="py-20">
+      {/* Our Products Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-primary md:text-4xl">Product Categories</h2>
-            <p className="mt-4 text-gray-600">Explore our wide range of refrigeration and HVAC supplies</p>
+            <h2 className="text-3xl font-bold text-primary md:text-4xl">Our Products</h2>
+            <p className="mt-4 text-gray-600">Premium industrial refrigeration and HVAC supplies</p>
           </div>
           
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-8">
             {[
-              "Refrigerant Gases",
-              "Compressor Oils",
-              "Butane Gas Cartridges",
-              "AC Copper Pipes",
-              "Brazing Rods",
-              "Refrigeration Accessories"
+              {
+                title: "Refrigerant Gas",
+                products: ["MPCL R134A", "Freon R22", "Floron R410A", "MPCL R404A"],
+                link: "/products"
+              },
+              {
+                title: "Compressor Oil",
+                products: ["Subros R134a Oil", "Fluoro R134a Oil"],
+                link: "/products"
+              },
+              {
+                title: "Butane Gas Cartridge",
+                products: ["MPCL Blue Flame Cartridge"],
+                link: "/products"
+              },
+              {
+                title: "AC Copper Pipe",
+                products: ["Air Conditioner Copper Pipe"],
+                link: "/products"
+              },
+              {
+                title: "Brazing Rod",
+                products: ["Copper Brazing Rods"],
+                link: "/products"
+              },
+              {
+                title: "Refrigeration Accessories",
+                products: ["Industrial Valves", "HVAC Fittings"],
+                link: "/products"
+              }
             ].map((cat) => (
-              <div key={cat} className="group relative overflow-hidden rounded-lg bg-gray-100 p-8 transition-all hover:bg-white hover:shadow-xl">
-                <h3 className="text-xl font-bold text-primary">{cat}</h3>
-                <p className="mt-2 text-sm text-gray-500">Quality products for industrial and commercial use.</p>
-                <div className="mt-6 flex items-center text-sm font-semibold text-secondary group-hover:underline">
-                  View Products →
-                </div>
+              <div key={cat.title} className="group relative overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 p-3 md:p-8 transition-all hover:bg-white hover:shadow-xl hover:border-secondary/20 flex flex-col items-center text-center md:items-start md:text-left">
+                <h3 className="text-[10px] sm:text-xs md:text-xl font-bold text-primary mb-2 md:mb-4 leading-tight">{cat.title}</h3>
+                <ul className="hidden md:block space-y-2 mb-6">
+                  {cat.products.map(p => (
+                    <li key={p} className="text-sm text-gray-600 flex items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary/40 mr-2"></span>
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <Link href={cat.link} className="inline-flex items-center text-[8px] sm:text-[10px] md:text-sm font-semibold text-secondary group-hover:underline">
+                  <span className="hidden md:inline">View All Products</span>
+                  <span className="md:hidden">View</span>
+                  <ArrowRight size={12} className="ml-1 md:w-4 md:h-4" />
+                </Link>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link href="/products">
+              <button className="rounded-full bg-primary px-8 py-3 font-bold text-white transition-all hover:bg-primary-dark shadow-md active:scale-95 text-sm md:text-base">
+                + View All Products
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -120,6 +163,3 @@ export default function Home() {
     </main>
   );
 }
-
-// Re-importing icons used in Why Choose Us
-import { ShieldCheck, Truck, MessageCircle } from 'lucide-react';

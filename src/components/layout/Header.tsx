@@ -29,8 +29,8 @@ export default function Header() {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: '/products' },
     { name: 'About Us', href: '/about' },
+    { name: 'Products', href: '/products' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -55,31 +55,30 @@ export default function Header() {
           </div>
         </div>
       </div>
-      
+
       {/* Main navigation */}
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/" className="text-xl font-bold text-primary md:text-2xl">
           MATA REFRIGERATION
         </Link>
-        
+
         <div className="hidden space-x-8 font-medium lg:flex">
           {navLinks.map((link) => {
-            const isActive = link.href === '/' 
-              ? pathname === '/' 
+            const isActive = link.href === '/'
+              ? pathname === '/'
               : pathname.startsWith(link.href);
             return (
-              <Link 
+              <Link
                 key={link.href}
-                href={link.href} 
-                className={`relative transition-all duration-200 active:scale-90 py-1 ${
-                  isActive 
-                    ? 'text-primary font-bold' 
+                href={link.href}
+                className={`relative transition-all duration-200 active:scale-90 py-1 ${isActive
+                    ? 'text-primary font-bold'
                     : 'text-gray-600 hover:text-primary'
-                }`}
+                  }`}
               >
                 {link.name}
                 {isActive && (
-                  <motion.span 
+                  <motion.span
                     layoutId="activeNavUnderline"
                     className="absolute -bottom-1 left-0 h-0.5 w-full bg-secondary rounded-full"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -89,17 +88,17 @@ export default function Header() {
             );
           })}
         </div>
-        
+
         <div className="flex items-center space-x-4">
-          <Link 
-            href="/contact" 
+          <Link
+            href="/contact"
             className="hidden rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark md:block transition-transform active:scale-95"
           >
             Request Quote
           </Link>
-          
+
           {/* Burger Menu Button */}
-          <button 
+          <button
             className="p-2 text-gray-600 lg:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
@@ -121,7 +120,7 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               className="fixed inset-0 top-[104px] z-30 bg-black/50 lg:hidden"
             />
-            
+
             {/* Sidebar */}
             <motion.div
               initial={{ x: '100%' }}
@@ -133,23 +132,22 @@ export default function Header() {
               <div className="flex h-full flex-col p-6 overflow-y-auto">
                 <div className="flex flex-col space-y-6">
                   {navLinks.map((link) => {
-                    const isActive = link.href === '/' 
-                      ? pathname === '/' 
+                    const isActive = link.href === '/'
+                      ? pathname === '/'
                       : pathname.startsWith(link.href);
-                      
+
                     return (
-                      <Link 
+                      <Link
                         key={link.href}
-                        href={link.href} 
-                        className={`flex items-center justify-between px-5 py-4 text-lg font-bold transition-all rounded-xl ${
-                          isActive 
-                            ? 'text-primary bg-primary/10' 
+                        href={link.href}
+                        className={`flex items-center justify-between px-5 py-4 text-lg font-bold transition-all rounded-xl ${isActive
+                            ? 'text-primary bg-primary/10'
                             : 'text-gray-700 hover:text-primary hover:bg-gray-50'
-                        }`}
+                          }`}
                       >
                         <span>{link.name}</span>
                         {isActive && (
-                          <motion.div 
+                          <motion.div
                             layoutId="activeDot"
                             className="h-2 w-2 rounded-full bg-primary"
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -158,14 +156,14 @@ export default function Header() {
                       </Link>
                     );
                   })}
-                  <Link 
-                    href="/contact" 
+                  <Link
+                    href="/contact"
                     className="mt-4 rounded-md bg-accent py-4 text-center text-lg font-bold text-white shadow-lg active:scale-95 transition-transform"
                   >
                     Request Quote
                   </Link>
                 </div>
-                
+
                 <div className="mt-auto pt-8 border-t border-gray-100">
                   <p className="text-sm text-gray-500 mb-4 font-medium">Quick Contact</p>
                   <div className="space-y-4">

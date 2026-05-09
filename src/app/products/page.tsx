@@ -1,33 +1,72 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
-import { MessageCircle, Phone, Filter, Search } from 'lucide-react';
+import { MessageCircle, Filter, Search } from 'lucide-react';
+import { useState, useMemo } from 'react';
 
 const MOCK_PRODUCTS = [
-  { id: '1', name: 'R404A Refrigerant Gas', category: 'Refrigerant Gases', image: null, specs: 'Suitable for industrial refrigeration' },
-  { id: '2', name: 'R32 Refrigerant Gas', category: 'Refrigerant Gases', image: null, specs: 'High efficiency, low GWP' },
-  { id: '3', name: 'R22 Refrigerant Gas', category: 'Refrigerant Gases', image: null, specs: 'Widely used in older AC systems' },
-  { id: '4', name: 'Mineral Compressor Oil', category: 'Compressor Oils', image: null, specs: 'For reciprocating compressors' },
-  { id: '5', name: 'Synthetic Compressor Oil', category: 'Compressor Oils', image: null, specs: 'High performance for modern systems' },
-  { id: '6', name: 'AC Copper Pipe', category: 'Copper Pipes', image: null, specs: 'High grade, durable' },
-  { id: '7', name: 'Brazing Rods', category: 'Brazing Rods', image: null, specs: 'Superior quality for strong joints' },
-  { id: '8', name: 'Butane Gas Cartridge', category: 'Butane Gas Cartridges', image: null, specs: 'Portable and safe' },
+  // Refrigerant Gases
+  { id: 'rg-1', name: 'MPCL R134A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'High purity refrigerant for various cooling applications.' },
+  { id: 'rg-2', name: 'MPCL R410A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Efficient refrigerant for modern AC systems.' },
+  { id: 'rg-3', name: 'Freon R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Original Freon quality for existing systems.' },
+  { id: 'rg-4', name: 'MPCL Fluoro R134A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Specialized fluoro-based R134A gas.' },
+  { id: 'rg-5', name: 'Floron R410A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Reliable Floron brand R410A.' },
+  { id: 'rg-6', name: 'Freon R410A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'High-performance Freon R410A.' },
+  { id: 'rg-7', name: 'MPCL R404A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Ideal for commercial refrigeration.' },
+  { id: 'rg-8', name: 'Industrial R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Bulk supply R22 for industrial use.' },
+  { id: 'rg-9', name: 'R407C Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Standard R407C for HVAC systems.' },
+  { id: 'rg-10', name: 'Floron R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Trusted Floron quality R22.' },
+  { id: 'rg-11', name: 'MPCL R407C Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Quality R407C from MPCL.' },
+  { id: 'rg-12', name: 'R1234 Yf Refrigerant Gas', category: 'Refrigerant Gas', specs: 'New generation eco-friendly refrigerant.' },
+  { id: 'rg-13', name: '10kg R32 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Convenient 10kg cylinder of R32.' },
+  { id: 'rg-14', name: '450g Floron R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Small 450g can for quick top-ups.' },
+  { id: 'rg-15', name: 'R 507 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Specialized R507 refrigerant.' },
+  { id: 'rg-16', name: 'R134A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Standard R134A for automotive and domestic use.' },
+  { id: 'rg-17', name: '45kg MPCL R404A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Bulk 45kg cylinder for large projects.' },
+  { id: 'rg-18', name: 'FLORON R407', category: 'Refrigerant Gas', specs: 'Floron R407 refrigerant.' },
+  { id: 'rg-19', name: 'R123 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'R123 refrigerant for specialized chillers.' },
+  
+  // Compressor Oils
+  { id: 'co-1', name: 'Subros R134a Refrigeration Compressor Oil', category: 'Compressor Oil', specs: 'High-grade oil for Subros systems.' },
+  { id: 'co-2', name: 'Fluoro R134a Compressor Oil', category: 'Compressor Oil', specs: 'Synthetic oil for R134a compressors.' },
+  
+  // Butane Gas
+  { id: 'bg-1', name: 'MPCL Blue Flame Butane Gas Cartridge', category: 'Butane Gas Cartridge', specs: 'Portable butane gas for brazing and camping.' },
+  
+  // Copper Pipes
+  { id: 'cp-1', name: 'Air Conditioner Copper Pipe', category: 'Air Conditioner Copper Pipe', specs: 'High-grade copper tubing for AC installation.' },
+  
+  // Brazing Rods
+  { id: 'br-1', name: 'Copper Brazing Rods', category: 'Brazing Rod', specs: 'Superior quality rods for strong copper-to-copper joints.' },
 ];
 
 const CATEGORIES = [
   'All',
-  'Refrigerant Gases',
-  'Compressor Oils',
-  'Butane Gas Cartridges',
-  'Copper Pipes',
-  'Brazing Rods',
-  'Accessories'
+  'Refrigerant Gas',
+  'Compressor Oil',
+  'Butane Gas Cartridge',
+  'Air Conditioner Copper Pipe',
+  'Brazing Rod'
 ];
 
 export default function ProductsPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredProducts = useMemo(() => {
+    return MOCK_PRODUCTS.filter((product) => {
+      const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                           product.specs.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="bg-primary py-12 text-white">
+      <section className="bg-primary py-12 text-white text-left">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold md:text-4xl">Product Catalog</h1>
           <p className="mt-2 text-secondary-light">Genuine refrigeration and HVAC supplies in Navi Mumbai</p>
@@ -45,15 +84,21 @@ export default function ProductsPage() {
                   <Filter size={20} />
                   <span>Categories</span>
                 </div>
-                <ul className="space-y-2">
+                <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 gap-2 no-scrollbar">
                   {CATEGORIES.map((cat) => (
-                    <li key={cat}>
-                      <button className={`w-full text-left rounded-md px-3 py-2 text-sm transition-colors ${cat === 'All' ? 'bg-secondary text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                        {cat}
-                      </button>
-                    </li>
+                    <button 
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`whitespace-nowrap rounded-md px-4 py-2 text-xs md:text-sm font-medium transition-all text-left ${
+                        selectedCategory === cat 
+                          ? 'bg-secondary text-white shadow-md' 
+                          : 'text-gray-600 border lg:border-none hover:bg-gray-100 hover:text-primary'
+                      }`}
+                    >
+                      {cat}
+                    </button>
                   ))}
-                </ul>
+                </div>
               </div>
             </aside>
 
@@ -65,47 +110,68 @@ export default function ProductsPage() {
                   <input 
                     type="text" 
                     placeholder="Search products..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary"
                   />
                 </div>
                 <div className="text-sm text-gray-500">
-                  Showing <span className="font-bold text-primary">{MOCK_PRODUCTS.length}</span> products
+                  Showing <span className="font-bold text-primary">{filteredProducts.length}</span> products
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                {MOCK_PRODUCTS.map((product) => (
-                  <div key={product.id} className="group flex flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-all hover:shadow-md">
+              {filteredProducts.length > 0 ? (
+                <div className="grid grid-cols-2 gap-2 md:gap-6 lg:grid-cols-2 xl:grid-cols-3">
+                  {filteredProducts.map((product) => (
+                    <div key={product.id} className="group flex flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md">
                     <div className="aspect-square bg-gray-100 flex items-center justify-center text-gray-400">
-                      {/* Placeholder for Product Image */}
-                      <span className="text-xs italic">Product Photo</span>
+                      <span className="text-[8px] sm:text-xs italic text-center px-1">Product Photo</span>
                     </div>
-                    <div className="flex flex-1 flex-col p-4">
-                      <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-secondary">
+                    <div className="flex flex-1 flex-col p-1.5 md:p-4">
+                      <div className="mb-0.5 md:mb-1 text-[7px] md:text-xs font-semibold uppercase tracking-wider text-secondary truncate">
                         {product.category}
                       </div>
-                      <h3 className="mb-2 text-lg font-bold text-primary">
+                      <h3 className="mb-1 md:mb-2 text-[9px] sm:text-[11px] md:text-lg font-bold text-primary line-clamp-2 leading-tight h-6 md:h-auto">
                         {product.name}
                       </h3>
-                      <p className="mb-6 text-sm text-gray-600">
+                      <p className="hidden md:block mb-6 text-sm text-gray-600">
                         {product.specs}
                       </p>
                       
-                      <div className="mt-auto grid grid-cols-2 gap-2">
-                        <Button variant="outline" size="sm" className="w-full">
+                      <div className="mt-auto flex flex-col gap-1 md:grid md:grid-cols-2 md:gap-2">
+                        <Button variant="outline" size="sm" className="w-full h-5 md:h-9 text-[8px] md:text-sm py-0 px-1">
                           Details
                         </Button>
                         <a href={`https://wa.me/918080673647?text=Hello, I am interested in ${product.name}. Please share best price and availability.`} className="w-full">
-                          <Button variant="whatsapp" size="sm" className="w-full">
-                            <MessageCircle size={16} className="mr-1" />
-                            Quote
+                          <Button variant="whatsapp" size="sm" className="w-full h-5 md:h-9 text-[8px] md:text-sm py-0 px-1">
+                            <MessageCircle size={10} className="mr-0.5 md:mr-1 md:w-4 md:h-4" />
+                            <span className="md:inline">Quote</span>
                           </Button>
                         </a>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-20 text-center">
+                  <div className="mb-4 rounded-full bg-gray-100 p-6 text-gray-400">
+                    <Search size={48} />
+                  </div>
+                  <h3 className="text-xl font-bold text-primary">No products found</h3>
+                  <p className="mt-2 text-gray-500">Try adjusting your search or category filter</p>
+                  <Button 
+                    variant="outline" 
+                    className="mt-6"
+                    onClick={() => {
+                      setSelectedCategory('All');
+                      setSearchQuery('');
+                    }}
+                  >
+                    Reset Filters
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
