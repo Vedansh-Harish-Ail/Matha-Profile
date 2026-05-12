@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Phone, MessageCircle, MapPin, Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
@@ -62,6 +62,7 @@ export default function Header() {
           MATA REFRIGERATION
         </Link>
 
+        {/* Desktop Nav */}
         <div className="hidden space-x-8 font-medium lg:flex">
           {navLinks.map((link) => {
             const isActive = link.href === '/'
@@ -71,6 +72,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 className={`relative transition-all duration-200 active:scale-90 py-1 ${isActive
                     ? 'text-primary font-bold'
                     : 'text-gray-600 hover:text-primary'
@@ -97,95 +99,75 @@ export default function Header() {
             Request Quote
           </Link>
 
-          {/* Burger Menu Button */}
+          {/* Burger Menu Button - BRIGHT BLUE FOR VISIBILITY */}
           <button
-            className="p-2 text-gray-600 lg:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 p-2 text-white lg:hidden z-[101] shadow-xl"
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+      {/* Mobile Menu Overlay - SIMPLE CSS VERSION */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-[100] flex flex-col bg-white overflow-y-auto lg:hidden">
+          {/* Menu Header */}
+          <div className="flex items-center justify-between p-6 border-b">
+            <span className="text-xl font-bold text-primary">MENU</span>
+            <button 
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 top-[104px] z-30 bg-black/50 lg:hidden"
-            />
-
-            {/* Sidebar */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-[104px] bottom-0 z-40 w-[80%] max-w-sm bg-white shadow-2xl lg:hidden"
+              className="p-3 bg-gray-100 rounded-full text-gray-600"
             >
-              <div className="flex h-full flex-col p-6 overflow-y-auto">
-                <div className="flex flex-col space-y-6">
-                  {navLinks.map((link) => {
-                    const isActive = link.href === '/'
-                      ? pathname === '/'
-                      : pathname.startsWith(link.href);
+              <X size={28} />
+            </button>
+          </div>
+          
+          {/* Navigation Links */}
+          <nav className="flex flex-col p-6 space-y-4">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  prefetch={false}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-2xl font-bold py-6 border-b border-gray-50 flex justify-between items-center ${isActive ? 'text-primary' : 'text-gray-800'}`}
+                >
+                  {link.name}
+                  {isActive && <div className="h-3 w-3 rounded-full bg-primary" />}
+                </Link>
+              );
+            })}
+            
+            {/* CTA Button */}
+            <Link 
+              href="/contact" 
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-6 w-full bg-primary text-white text-center py-5 rounded-xl text-xl font-bold shadow-lg shadow-primary/20"
+            >
+              Request Quote
+            </Link>
 
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={`flex items-center justify-between px-5 py-4 text-lg font-bold transition-all rounded-xl ${isActive
-                            ? 'text-primary bg-primary/10'
-                            : 'text-gray-700 hover:text-primary hover:bg-gray-50'
-                          }`}
-                      >
-                        <span>{link.name}</span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeDot"
-                            className="h-2 w-2 rounded-full bg-primary"
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                          />
-                        )}
-                      </Link>
-                    );
-                  })}
-                  <Link
-                    href="/contact"
-                    className="mt-4 rounded-md bg-accent py-4 text-center text-lg font-bold text-white shadow-lg active:scale-95 transition-transform"
-                  >
-                    Request Quote
-                  </Link>
-                </div>
-
-                <div className="mt-auto pt-8 border-t border-gray-100">
-                  <p className="text-sm text-gray-500 mb-4 font-medium">Quick Contact</p>
-                  <div className="space-y-4">
-                    <a href="tel:+918080673647" className="flex items-center space-x-3 text-gray-700">
-                      <div className="bg-blue-50 p-2 rounded-full text-blue-600">
-                        <Phone size={18} />
-                      </div>
-                      <span>+91 80806 73647</span>
-                    </a>
-                    <a href="https://wa.me/918080673647" className="flex items-center space-x-3 text-gray-700">
-                      <div className="bg-green-50 p-2 rounded-full text-green-600">
-                        <MessageCircle size={18} />
-                      </div>
-                      <span>WhatsApp Enquiry</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            {/* Quick Contact Info */}
+            <div className="pt-8 mt-4 border-t border-gray-100 space-y-6">
+              <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Direct Contact</p>
+              <a href="tel:+918080673647" className="flex items-center gap-4 text-gray-700 font-bold text-lg">
+                <div className="bg-primary/10 p-3 rounded-full text-primary"><Phone size={24} /></div>
+                +91 80806 73647
+              </a>
+              <a href="https://wa.me/918080673647" className="flex items-center gap-4 text-gray-700 font-bold text-lg">
+                <div className="bg-green-50 p-3 rounded-full text-green-600"><MessageCircle size={24} /></div>
+                WhatsApp Enquiry
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

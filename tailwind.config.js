@@ -10,26 +10,46 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#002B5B', // Deep Sea - Trust, Authority
-          light: '#1a416b',
-          dark: '#001e40',
+          DEFAULT: '#004ac6', // Trustworthy Blue
+          container: '#2563eb',
+          fixed: '#dbe1ff',
         },
         secondary: {
-          DEFAULT: '#2B7A78', // Cool Cyan - Cooling, Technical
-          light: '#3e9290',
-          dark: '#1f5958',
+          DEFAULT: '#6b38d4', // Energetic Purple
+          container: '#8455ef',
+          fixed: '#e9ddff',
         },
-        accent: {
-          DEFAULT: '#FF8C00', // Safety Orange - Urgent CTAs
-          light: '#ffa333',
-          dark: '#cc7000',
+        surface: {
+          DEFAULT: '#f8f9ff',
+          dim: '#cbdbf5',
+          bright: '#f8f9ff',
+          container: {
+            lowest: '#ffffff',
+            low: '#eff4ff',
+            DEFAULT: '#e5eeff',
+            high: '#dce9ff',
+            highest: '#d3e4fe',
+          },
+        },
+        outline: {
+          DEFAULT: '#737686',
+          variant: '#c3c6d7',
         },
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Inter', 'sans-serif'],
+        metropolis: ['Metropolis', 'Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        'xl': '1.5rem',
+      },
+      backdropBlur: {
+        'xs': '2px',
+        'glass': '20px',
+        'deep': '40px',
       },
     },
   },
   plugins: [],
 };
+

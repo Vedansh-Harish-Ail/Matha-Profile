@@ -10,6 +10,13 @@ const nextConfig = {
       },
     ],
   },
+  // Fix for Cloudflare Tunnel navigation issues
+  allowedDevOrigins: ['*'],
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['*'],
+    },
+  },
 };
 
 export default nextConfig;
