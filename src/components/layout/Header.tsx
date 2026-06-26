@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Phone, MessageCircle, MapPin, Menu, X } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Menu, X, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
       {/* Top bar for contact info */}
-      <div className="bg-primary py-2 text-white">
+      <div className="bg-[#06112C] py-2 text-white">
         <div className="container mx-auto flex flex-wrap justify-between px-4 text-xs md:text-sm">
           <div className="flex space-x-4">
             <a href="tel:+918080673647" className="flex items-center space-x-1 hover:text-secondary-light">
@@ -58,7 +58,7 @@ export default function Header() {
 
       {/* Main navigation */}
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" className="text-xl font-bold text-primary md:text-2xl">
+        <Link href="/" className="text-xl font-bold text-[#06112C] md:text-2xl">
           MATA REFRIGERATION
         </Link>
 
@@ -93,15 +93,24 @@ export default function Header() {
 
         <div className="flex items-center space-x-4">
           <Link
+            href="/admin"
+            aria-label="Admin login"
+            title="Admin login"
+            className="hidden h-10 w-10 items-center justify-center rounded-md border border-primary text-primary transition-colors hover:bg-primary hover:text-white md:flex"
+          >
+            <ShieldCheck size={20} />
+          </Link>
+
+          <Link
             href="/contact"
             className="hidden rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark md:block transition-transform active:scale-95"
           >
             Request Quote
           </Link>
 
-          {/* Burger Menu Button - BRIGHT BLUE FOR VISIBILITY */}
+          {/* Burger Menu Button */}
           <button
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 p-2 text-white lg:hidden z-[101] shadow-xl"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#06112C] p-2 text-white lg:hidden z-[101] shadow-xl"
             onClick={() => {
               setIsMenuOpen(!isMenuOpen);
             }}
@@ -148,9 +157,18 @@ export default function Header() {
             <Link 
               href="/contact" 
               onClick={() => setIsMenuOpen(false)}
-              className="mt-6 w-full bg-primary text-white text-center py-5 rounded-xl text-xl font-bold shadow-lg shadow-primary/20"
+              className="mt-6 w-full bg-accent text-white text-center py-5 rounded-xl text-xl font-bold shadow-lg shadow-accent/20"
             >
               Request Quote
+            </Link>
+
+            <Link
+              href="/admin"
+              onClick={() => setIsMenuOpen(false)}
+              className="flex w-full items-center justify-center gap-3 rounded-xl border border-primary py-5 text-xl font-bold text-primary"
+            >
+              <ShieldCheck size={24} />
+              Admin Login
             </Link>
 
             {/* Quick Contact Info */}
@@ -171,3 +189,4 @@ export default function Header() {
     </header>
   );
 }
+

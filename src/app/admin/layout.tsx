@@ -1,15 +1,12 @@
-import { AdminSidebar } from '@/components/admin/Sidebar';
-
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-surface font-sans">
-      <AdminSidebar />
-      <main className="flex-1 p-8 overflow-y-auto">
-        <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-surface font-sans">
+      <main className="overflow-y-auto p-4 md:p-8">
+        <div className="mx-auto max-w-7xl">
           {children}
         </div>
       </main>

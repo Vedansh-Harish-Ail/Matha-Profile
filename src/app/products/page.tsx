@@ -2,66 +2,36 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { CATEGORIES, readProducts, type Product } from '@/lib/products';
 import { MessageCircle, Filter, Search } from 'lucide-react';
-import { useState, useMemo } from 'react';
-
-const MOCK_PRODUCTS = [
-  // Refrigerant Gases
-  { id: 'rg-1', name: 'MPCL R134A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'High purity refrigerant for various cooling applications.' },
-  { id: 'rg-2', name: 'MPCL R410A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Efficient refrigerant for modern AC systems.' },
-  { id: 'rg-3', name: 'Freon R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Original Freon quality for existing systems.' },
-  { id: 'rg-4', name: 'MPCL Fluoro R134A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Specialized fluoro-based R134A gas.' },
-  { id: 'rg-5', name: 'Floron R410A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Reliable Floron brand R410A.' },
-  { id: 'rg-6', name: 'Freon R410A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'High-performance Freon R410A.' },
-  { id: 'rg-7', name: 'MPCL R404A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Ideal for commercial refrigeration.' },
-  { id: 'rg-8', name: 'Industrial R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Bulk supply R22 for industrial use.' },
-  { id: 'rg-9', name: 'R407C Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Standard R407C for HVAC systems.' },
-  { id: 'rg-10', name: 'Floron R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Trusted Floron quality R22.' },
-  { id: 'rg-11', name: 'MPCL R407C Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Quality R407C from MPCL.' },
-  { id: 'rg-12', name: 'R1234 Yf Refrigerant Gas', category: 'Refrigerant Gas', specs: 'New generation eco-friendly refrigerant.' },
-  { id: 'rg-13', name: '10kg R32 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Convenient 10kg cylinder of R32.' },
-  { id: 'rg-14', name: '450g Floron R22 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Small 450g can for quick top-ups.' },
-  { id: 'rg-15', name: 'R 507 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Specialized R507 refrigerant.' },
-  { id: 'rg-16', name: 'R134A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Standard R134A for automotive and domestic use.' },
-  { id: 'rg-17', name: '45kg MPCL R404A Refrigerant Gas', category: 'Refrigerant Gas', specs: 'Bulk 45kg cylinder for large projects.' },
-  { id: 'rg-18', name: 'FLORON R407', category: 'Refrigerant Gas', specs: 'Floron R407 refrigerant.' },
-  { id: 'rg-19', name: 'R123 Refrigerant Gas', category: 'Refrigerant Gas', specs: 'R123 refrigerant for specialized chillers.' },
-  
-  // Compressor Oils
-  { id: 'co-1', name: 'Subros R134a Refrigeration Compressor Oil', category: 'Compressor Oil', specs: 'High-grade oil for Subros systems.' },
-  { id: 'co-2', name: 'Fluoro R134a Compressor Oil', category: 'Compressor Oil', specs: 'Synthetic oil for R134a compressors.' },
-  
-  // Butane Gas
-  { id: 'bg-1', name: 'MPCL Blue Flame Butane Gas Cartridge', category: 'Butane Gas Cartridge', specs: 'Portable butane gas for brazing and camping.' },
-  
-  // Copper Pipes
-  { id: 'cp-1', name: 'Air Conditioner Copper Pipe', category: 'Air Conditioner Copper Pipe', specs: 'High-grade copper tubing for AC installation.' },
-  
-  // Brazing Rods
-  { id: 'br-1', name: 'Copper Brazing Rods', category: 'Brazing Rod', specs: 'Superior quality rods for strong copper-to-copper joints.' },
-];
-
-const CATEGORIES = [
-  'All',
-  'Refrigerant Gas',
-  'Compressor Oil',
-  'Butane Gas Cartridge',
-  'Air Conditioner Copper Pipe',
-  'Brazing Rod'
-];
+import { useEffect, useState, useMemo } from 'react';
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const loadProducts = () => setProducts(readProducts());
+
+    loadProducts();
+    window.addEventListener('mata-products-updated', loadProducts);
+    window.addEventListener('storage', loadProducts);
+
+    return () => {
+      window.removeEventListener('mata-products-updated', loadProducts);
+      window.removeEventListener('storage', loadProducts);
+    };
+  }, []);
 
   const filteredProducts = useMemo(() => {
-    return MOCK_PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                            product.specs.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [products, selectedCategory, searchQuery]);
 
   return (
     <div className="flex flex-col">
@@ -124,33 +94,38 @@ export default function ProductsPage() {
                 <div className="grid grid-cols-2 gap-2 md:gap-6 lg:grid-cols-2 xl:grid-cols-3">
                   {filteredProducts.map((product) => (
                     <div key={product.id} className="group flex flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md">
-                    <div className="aspect-square bg-gray-100 flex items-center justify-center text-gray-400">
-                      <span className="text-[8px] sm:text-xs italic text-center px-1">Product Photo</span>
-                    </div>
-                    <div className="flex flex-1 flex-col p-1.5 md:p-4">
-                      <div className="mb-0.5 md:mb-1 text-[7px] md:text-xs font-semibold uppercase tracking-wider text-secondary truncate">
-                        {product.category}
+                      <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden text-gray-400">
+                        {product.image ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+                        ) : (
+                          <span className="text-[8px] sm:text-xs italic text-center px-1">Product Photo</span>
+                        )}
                       </div>
-                      <h3 className="mb-1 md:mb-2 text-[9px] sm:text-[11px] md:text-lg font-bold text-primary line-clamp-2 leading-tight h-6 md:h-auto">
-                        {product.name}
-                      </h3>
-                      <p className="hidden md:block mb-6 text-sm text-gray-600">
-                        {product.specs}
-                      </p>
-                      
-                      <div className="mt-auto flex flex-col gap-1 md:grid md:grid-cols-2 md:gap-2">
-                        <Button variant="outline" size="sm" className="w-full h-5 md:h-9 text-[8px] md:text-sm py-0 px-1">
-                          Details
-                        </Button>
-                        <a href={`https://wa.me/918080673647?text=Hello, I am interested in ${product.name}. Please share best price and availability.`} className="w-full">
-                          <Button variant="whatsapp" size="sm" className="w-full h-5 md:h-9 text-[8px] md:text-sm py-0 px-1">
-                            <MessageCircle size={10} className="mr-0.5 md:mr-1 md:w-4 md:h-4" />
-                            <span className="md:inline">Quote</span>
+                      <div className="flex flex-1 flex-col p-1.5 md:p-4">
+                        <div className="mb-0.5 md:mb-1 text-[7px] md:text-xs font-semibold uppercase tracking-wider text-secondary truncate">
+                          {product.category}
+                        </div>
+                        <h3 className="mb-1 md:mb-2 text-[9px] sm:text-[11px] md:text-lg font-bold text-primary line-clamp-2 leading-tight h-6 md:h-auto">
+                          {product.name}
+                        </h3>
+                        <p className="hidden md:block mb-6 text-sm text-gray-600">
+                          {product.specs}
+                        </p>
+                        
+                        <div className="mt-auto flex flex-col gap-1 md:grid md:grid-cols-2 md:gap-2">
+                          <Button variant="outline" size="sm" className="w-full h-5 md:h-9 text-[8px] md:text-sm py-0 px-1">
+                            Details
                           </Button>
-                        </a>
+                          <a href={`https://wa.me/918080673647?text=Hello, I am interested in ${product.name}. Please share best price and availability.`} className="w-full">
+                            <Button variant="whatsapp" size="sm" className="w-full h-5 md:h-9 text-[8px] md:text-sm py-0 px-1">
+                              <MessageCircle size={10} className="mr-0.5 md:mr-1 md:w-4 md:h-4" />
+                              <span className="md:inline">Quote</span>
+                            </Button>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   ))}
                 </div>
               ) : (

@@ -12,16 +12,16 @@ import Link from 'next/link';
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col font-sans text-[#0B1E3F]">
+    <div className="flex flex-col font-sans text-primary">
       {/* --- HERO SECTION --- */}
-      <section className="relative bg-[#0B1E3F] py-12 lg:py-16 overflow-hidden">
+      <section className="relative bg-[#06112C] py-12 lg:py-16 overflow-hidden">
         <div className="container relative z-10 mx-auto px-6 lg:px-16">
           <div className="max-w-3xl">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[#2B7A78] mb-2 inline-block">
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-secondary-light mb-2 inline-block">
               Get in Touch
             </span>
             <h1 className="mb-4 font-heading text-3xl font-bold text-white md:text-4xl lg:text-5xl uppercase tracking-tight">
-              Contact <span className="text-[#2B7A78]">Mata</span> Refrigeration
+              Contact <span className="text-secondary-light">Mata</span> Refrigeration
             </h1>
             <p className="text-lg text-[#A0B4CC] leading-relaxed max-w-xl">
               Connect with our industrial experts for high-performance refrigerant gases, components, and regional technical support.
@@ -36,37 +36,37 @@ export default function ContactPage() {
       <section className="relative -mt-10 z-20">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 group hover:border-[#2B7A78] transition-all">
-              <div className="h-10 w-10 rounded-lg bg-[#2B7A78]/10 text-[#2B7A78] flex items-center justify-center mb-4 group-hover:bg-[#2B7A78] group-hover:text-white transition-colors">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 group hover:border-secondary-light transition-all">
+              <div className="h-10 w-10 rounded-lg bg-secondary-light/10 text-secondary-light flex items-center justify-center mb-4 group-hover:bg-secondary-light group-hover:text-white transition-colors">
                 <Phone size={20} />
               </div>
               <h3 className="font-heading text-lg font-bold mb-1">Call Experts</h3>
               <p className="text-xs text-gray-500 mb-3">Direct line for technical specs & pricing.</p>
-              <a href="tel:+918080673647" className="text-md font-bold text-[#0B1E3F] hover:text-[#2B7A78] flex items-center gap-2">
+              <a href="tel:+918080673647" className="text-md font-bold text-primary hover:text-secondary-light flex items-center gap-2">
                 +91 80806 73647
                 <ArrowRight size={14} />
               </a>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 group hover:border-[#2B7A78] transition-all">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 group hover:border-secondary-light transition-all">
               <div className="h-10 w-10 rounded-lg bg-[#25D366]/10 text-[#25D366] flex items-center justify-center mb-4 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
                 <MessageCircle size={20} />
               </div>
               <h3 className="font-heading text-lg font-bold mb-1">WhatsApp Enquiry</h3>
               <p className="text-xs text-gray-500 mb-3">Fastest route for stock availability.</p>
-              <a href="https://wa.me/918080673647" className="text-md font-bold text-[#0B1E3F] hover:text-[#25D366] flex items-center gap-2">
+              <a href="https://wa.me/918080673647" className="text-md font-bold text-primary hover:text-[#25D366] flex items-center gap-2">
                 Message Now
                 <ArrowRight size={14} />
               </a>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 group hover:border-[#2B7A78] transition-all">
-              <div className="h-10 w-10 rounded-lg bg-[#2B7A78]/10 text-[#2B7A78] flex items-center justify-center mb-4 group-hover:bg-[#2B7A78] group-hover:text-white transition-colors">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 group hover:border-secondary-light transition-all">
+              <div className="h-10 w-10 rounded-lg bg-secondary-light/10 text-secondary-light flex items-center justify-center mb-4 group-hover:bg-secondary-light group-hover:text-white transition-colors">
                 <Mail size={20} />
               </div>
               <h3 className="font-heading text-lg font-bold mb-1">Email Support</h3>
               <p className="text-xs text-gray-500 mb-3">For bulk quotes & corporate inquiries.</p>
-              <a href="mailto:info@matarefrigeration.com" className="text-md font-bold text-[#0B1E3F] hover:text-[#2B7A78] flex items-center gap-2">
+              <a href="mailto:info@matarefrigeration.com" className="text-md font-bold text-primary hover:text-secondary-light flex items-center gap-2">
                 Email Us
                 <ArrowRight size={14} />
               </a>
@@ -86,9 +86,9 @@ export default function ContactPage() {
                 <h2 className="font-heading text-2xl font-bold mb-6 uppercase tracking-tight">Regional Hub</h2>
                 <div className="space-y-4">
                   <div className="flex gap-3">
-                    <MapPin className="text-[#2B7A78] shrink-0" size={20} />
+                    <MapPin className="text-secondary-light shrink-0" size={20} />
                     <div>
-                      <h4 className="font-bold text-[#0B1E3F] text-sm">Main Office & Distribution</h4>
+                      <h4 className="font-bold text-primary text-sm">Main Office & Distribution</h4>
                       <p className="text-gray-600 mt-1 text-sm leading-relaxed">
                         Shop no 1, Channel Classic, Plot No-91,<br />
                         HSG Society, Sector 4, Kopar Khairane,<br />
@@ -97,12 +97,12 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <Clock className="text-[#2B7A78] shrink-0" size={20} />
+                    <Clock className="text-secondary-light shrink-0" size={20} />
                     <div>
-                      <h4 className="font-bold text-[#0B1E3F] text-sm">Operations</h4>
+                      <h4 className="font-bold text-primary text-sm">Operations</h4>
                       <p className="text-gray-600 mt-1 text-sm">
                         Mon - Sat: 09:00 AM - 08:00 PM<br />
-                        <span className="text-[#2B7A78] font-semibold italic text-xs">Sunday: WhatsApp Support Only</span>
+                        <span className="text-secondary-light font-semibold italic text-xs">Sunday: WhatsApp Support Only</span>
                       </p>
                     </div>
                   </div>
@@ -111,11 +111,11 @@ export default function ContactPage() {
 
               {/* Trust Card */}
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
-                <div className="h-8 w-8 rounded-full bg-white flex items-center justify-center shadow-sm text-[#2B7A78]">
+                <div className="h-8 w-8 rounded-full bg-white flex items-center justify-center shadow-sm text-secondary-light">
                   <ShieldCheck size={16} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#0B1E3F] text-xs">GST Verified Dealer</h4>
+                  <h4 className="font-bold text-primary text-xs">GST Verified Dealer</h4>
                   <p className="text-[10px] text-gray-500 mt-1">Registered industrial supplier compliant with safety standards for refrigerant handling.</p>
                 </div>
               </div>
@@ -127,7 +127,7 @@ export default function ContactPage() {
                   className="absolute inset-0 w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
                   loading="lazy"
                 ></iframe>
-                <div className="absolute inset-0 bg-[#0B1E3F]/10 pointer-events-none group-hover:opacity-0 transition-opacity" />
+                <div className="absolute inset-0 bg-primary/10 pointer-events-none group-hover:opacity-0 transition-opacity" />
               </div>
             </div>
 
@@ -154,7 +154,7 @@ export default function ContactPage() {
                         type="text" 
                         name="name"
                         required
-                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-[#2B7A78] transition-all outline-none text-[#0B1E3F]" 
+                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-secondary-light transition-all outline-none text-primary" 
                         placeholder="Industrial Buyer Name" 
                       />
                     </div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                       <input 
                         type="text" 
                         name="company"
-                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-[#2B7A78] transition-all outline-none text-[#0B1E3F]" 
+                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-secondary-light transition-all outline-none text-primary" 
                         placeholder="Technical / Contracting Firm" 
                       />
                     </div>
@@ -176,7 +176,7 @@ export default function ContactPage() {
                         type="tel" 
                         name="phone"
                         required
-                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-[#2B7A78] transition-all outline-none text-[#0B1E3F]" 
+                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-secondary-light transition-all outline-none text-primary" 
                         placeholder="For instant WhatsApp quote" 
                       />
                     </div>
@@ -184,7 +184,7 @@ export default function ContactPage() {
                       <label className="text-xs font-bold uppercase tracking-widest text-gray-400">Requirement</label>
                       <select 
                         name="product_category"
-                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-[#2B7A78] transition-all outline-none text-[#0B1E3F] appearance-none"
+                        className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-secondary-light transition-all outline-none text-primary appearance-none"
                       >
                         <option value="General Enquiry">Select Product Category</option>
                         <option value="Refrigerant Gases">Refrigerant Gases (R22, R134a, etc)</option>
@@ -201,14 +201,14 @@ export default function ContactPage() {
                       name="message"
                       required
                       rows={4} 
-                      className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-[#2B7A78] transition-all outline-none text-[#0B1E3F] resize-none" 
+                      className="w-full bg-gray-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-secondary-light transition-all outline-none text-primary resize-none" 
                       placeholder="Describe your scale, quantity, or technical needs..."
                     ></textarea>
                   </div>
 
                   <button 
                     type="submit"
-                    className="w-full bg-[#0B1E3F] text-white py-5 rounded-xl font-bold hover:bg-[#2B7A78] transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-3"
+                    className="w-full bg-primary text-white py-5 rounded-xl font-bold hover:bg-secondary-light transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-3"
                   >
                     SEND ENQUIRY
                     <Send size={18} />

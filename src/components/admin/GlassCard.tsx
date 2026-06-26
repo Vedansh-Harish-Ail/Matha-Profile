@@ -23,7 +23,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       ${blurMap[intensity]} 
       border border-white/20 
       rounded-xl 
-      shadow-[0_20px_40px_rgba(37,99,235,0.08)]
+      shadow-[0_20px_40px_rgba(0,43,91,0.08)]
       ${className}
     `}>
       {children}

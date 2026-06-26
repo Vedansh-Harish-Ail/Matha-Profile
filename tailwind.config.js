@@ -10,14 +10,19 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#004ac6', // Trustworthy Blue
-          container: '#2563eb',
-          fixed: '#dbe1ff',
+          DEFAULT: '#06112C', // Very Dark Navy
+          light: '#0B1E3F',
+          dark: '#030816',
         },
         secondary: {
-          DEFAULT: '#6b38d4', // Energetic Purple
-          container: '#8455ef',
-          fixed: '#e9ddff',
+          DEFAULT: '#0B1E3F', // Dark Navy
+          light: '#2B7A78',   // Teal-ish highlight
+          dark: '#030816',
+        },
+        accent: {
+          DEFAULT: '#FF8C00', // Safety Orange - Urgent CTAs
+          light: '#ffa333',
+          dark: '#cc7000',
         },
         surface: {
           DEFAULT: '#f8f9ff',
@@ -38,7 +43,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        metropolis: ['Metropolis', 'Inter', 'sans-serif'],
+        heading: ['Inter', 'sans-serif'],
       },
       borderRadius: {
         'xl': '1.5rem',
@@ -52,4 +57,3 @@ export default {
   },
   plugins: [],
 };
-

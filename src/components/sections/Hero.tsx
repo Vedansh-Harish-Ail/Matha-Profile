@@ -4,7 +4,7 @@ import { Phone, MessageCircle, BadgeCheck, MapPin } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0B1E3F]">
+    <section className="relative w-full overflow-hidden bg-[#06112C]">
       {/* --- Layout Grid --- */}
       <div className="relative flex min-h-[420px] lg:min-h-[520px]">
 
@@ -37,7 +37,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-3">
             <a
               href="tel:+918080673647"
-              className="inline-flex items-center gap-2 rounded-md border border-white bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[#0B1E3F]"
+              className="inline-flex items-center gap-2 rounded-md border border-white bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[#06112C]"
             >
               <Phone size={16} />
               Call Now
@@ -66,9 +66,9 @@ export default function Hero() {
         {/* ---- RIGHT: Image Pane ---- */}
         <div className="absolute inset-0 lg:relative lg:inset-auto lg:w-[42%]">
           {/* Dark overlay on mobile so text is readable; clipped on desktop */}
-          <div className="absolute inset-0 bg-[#0B1E3F]/75 lg:bg-transparent" />
+          <div className="absolute inset-0 bg-[#06112C]/75 lg:bg-transparent" />
           {/* Blue-tinted overlay on top of the image on desktop */}
-          <div className="absolute inset-0 hidden bg-[#0B1E3F]/55 lg:block" />
+          <div className="absolute inset-0 hidden bg-[#06112C]/55 lg:block" />
           <Image
             src="/images/hero-bg.png"
             alt="Industrial refrigeration machinery"
