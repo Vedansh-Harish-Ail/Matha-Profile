@@ -1,14 +1,33 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Phone, MessageCircle, MapPin, Menu, X, ShieldCheck } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Phone, MessageCircle, MapPin, Menu, X, ShieldCheck, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
+const ADMIN_AUTH_KEY = 'mata-admin-auth';
+
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const syncAdminAuth = () => {
+      setIsAdminLoggedIn(window.localStorage.getItem(ADMIN_AUTH_KEY) === 'true');
+    };
+
+    syncAdminAuth();
+    window.addEventListener('mata-admin-auth', syncAdminAuth);
+    window.addEventListener('storage', syncAdminAuth);
+
+    return () => {
+      window.removeEventListener('mata-admin-auth', syncAdminAuth);
+      window.removeEventListener('storage', syncAdminAuth);
+    };
+  }, []);
 
   // Close menu when route changes
   useEffect(() => {
@@ -26,6 +45,14 @@ export default function Header() {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
+
+  const handleLogout = () => {
+    window.localStorage.removeItem(ADMIN_AUTH_KEY);
+    window.dispatchEvent(new Event('mata-admin-auth'));
+    setIsAdminLoggedIn(false);
+    setIsMenuOpen(false);
+    router.push('/admin');
+  };
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -101,12 +128,23 @@ export default function Header() {
             <ShieldCheck size={20} />
           </Link>
 
-          <Link
-            href="/contact"
-            className="hidden rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark md:block transition-transform active:scale-95"
-          >
-            Request Quote
-          </Link>
+          {isAdminLoggedIn ? (
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="hidden items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition-transform hover:bg-accent-dark active:scale-95 md:flex"
+            >
+              <LogOut size={16} />
+              Logout
+            </button>
+          ) : (
+            <Link
+              href="/contact"
+              className="hidden rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark md:block transition-transform active:scale-95"
+            >
+              Request Quote
+            </Link>
+          )}
 
           {/* Burger Menu Button */}
           <button
@@ -154,13 +192,24 @@ export default function Header() {
             })}
             
             {/* CTA Button */}
-            <Link 
-              href="/contact" 
-              onClick={() => setIsMenuOpen(false)}
-              className="mt-6 w-full bg-accent text-white text-center py-5 rounded-xl text-xl font-bold shadow-lg shadow-accent/20"
-            >
-              Request Quote
-            </Link>
+            {isAdminLoggedIn ? (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-accent py-5 text-xl font-bold text-white shadow-lg shadow-accent/20"
+              >
+                <LogOut size={24} />
+                Logout
+              </button>
+            ) : (
+              <Link 
+                href="/contact" 
+                onClick={() => setIsMenuOpen(false)}
+                className="mt-6 w-full bg-accent text-white text-center py-5 rounded-xl text-xl font-bold shadow-lg shadow-accent/20"
+              >
+                Request Quote
+              </Link>
+            )}
 
             <Link
               href="/admin"
@@ -189,4 +238,3 @@ export default function Header() {
     </header>
   );
 }
-
