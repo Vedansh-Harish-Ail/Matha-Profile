@@ -17,7 +17,7 @@ export default function Footer() {
             <div className="flex flex-col items-center md:items-start space-y-2 text-sm">
               <div className="flex flex-col md:flex-row items-center md:items-start space-y-2 md:space-y-0 md:space-x-3 text-center md:text-left">
                 <MapPin size={18} className="text-secondary shrink-0" />
-                <span className="max-w-[250px] md:max-w-none">Shop no 1, Channel Classic, Plot No-91, Sector 4, Kopar Khairane, Navi Mumbai - 400709</span>
+                <span className="max-w-[250px] md:max-w-none">Shop No -1, Plot No-91, Channel Classic, HSG Society, Sector 1, Kopar Khairane, Navi Mumbai - 400709</span>
               </div>
             </div>
           </div>

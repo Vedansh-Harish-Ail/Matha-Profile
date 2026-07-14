@@ -52,7 +52,7 @@ export default function Hero() {
               WhatsApp Enquiry
             </a>
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Shop+no+1,+Channel+Classic,+Plot+No-91,+HSG+Society,+Sector+4,+Kopar+Khairane,+Navi+Mumbai"
+              href="https://www.google.com/maps/dir/?api=1&destination=Shop+No+-1,+Plot+No-91,+Channel+Classic,+HSG+Society,+Sector+1,+Kopar+Khairane,+Navi+Mumbai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-secondary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-secondary-dark"

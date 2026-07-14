@@ -90,8 +90,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-primary text-sm">Main Office & Distribution</h4>
                       <p className="text-gray-600 mt-1 text-sm leading-relaxed">
-                        Shop no 1, Channel Classic, Plot No-91,<br />
-                        HSG Society, Sector 4, Kopar Khairane,<br />
+                        Shop No -1, Plot No-91, Channel Classic,<br />
+                        HSG Society, Sector 1, Kopar Khairane,<br />
                         Navi Mumbai, Maharashtra - 400709
                       </p>
                     </div>
