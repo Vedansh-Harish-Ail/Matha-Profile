@@ -286,95 +286,95 @@ export default function AdminDashboard() {
 
       <div className="grid gap-8 xl:grid-cols-[420px_1fr]">
         <div className="xl:sticky xl:top-24 xl:self-start">
-          <form onSubmit={handleSaveProduct} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="mb-6 flex items-center justify-between gap-4">
+          <form onSubmit={handleSaveProduct} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <div className="mb-3 flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-bold text-primary">{editingProduct.id ? 'Edit Product' : 'Add Product'}</h2>
-                <p className="text-sm text-gray-500">Changes are saved to the live catalog on this browser.</p>
+                <h2 className="text-lg font-bold text-primary">{editingProduct.id ? 'Edit Product' : 'Add Product'}</h2>
+                <p className="text-xs text-gray-500">Changes are saved to the live catalog.</p>
               </div>
               {editingProduct.id && (
-                <button type="button" onClick={startNewProduct} className="rounded-md p-2 text-gray-500 hover:bg-gray-100" aria-label="Clear form">
-                  <X size={18} />
+                <button type="button" onClick={startNewProduct} className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100" aria-label="Clear form">
+                  <X size={16} />
                 </button>
               )}
             </div>
 
-            <div className="mb-5 overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
-              <div className="flex aspect-video items-center justify-center overflow-hidden text-gray-400">
+            <div className="mb-3 overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+              <div className="flex h-28 items-center justify-center overflow-hidden text-gray-400">
                 {editingProduct.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={editingProduct.image} alt={editingProduct.name || 'Product preview'} className="h-full w-full object-cover" />
                 ) : (
-                  <div className="flex flex-col items-center gap-2 text-sm">
-                    <ImagePlus size={26} />
+                  <div className="flex flex-col items-center gap-1.5 text-xs">
+                    <ImagePlus size={20} />
                     Product photo
                   </div>
                 )}
               </div>
               {editingProduct.image ? (
                 <div className="grid grid-cols-2 border-t border-gray-200 divide-x divide-gray-200">
-                  <label className="flex cursor-pointer items-center justify-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-primary hover:bg-gray-50">
-                    <ImagePlus size={16} />
+                  <label className="flex cursor-pointer items-center justify-center gap-2 bg-white px-3 py-2 text-xs font-semibold text-primary hover:bg-gray-50">
+                    <ImagePlus size={14} />
                     Upload Photo
                     <input type="file" accept="image/*" className="hidden" onChange={(event) => handleImageUpload(event)} />
                   </label>
                   <button
                     type="button"
                     onClick={() => updateEditingProduct('image', '')}
-                    className="flex items-center justify-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-red-600 hover:bg-red-50 transition-colors"
+                    className="flex items-center justify-center gap-2 bg-white px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 transition-colors"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={14} />
                     Remove
                   </button>
                 </div>
               ) : (
-                <label className="flex cursor-pointer items-center justify-center gap-2 border-t border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-primary hover:bg-gray-50">
-                  <ImagePlus size={16} />
+                <label className="flex cursor-pointer items-center justify-center gap-2 border-t border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-primary hover:bg-gray-50">
+                  <ImagePlus size={14} />
                   Upload Photo
                   <input type="file" accept="image/*" className="hidden" onChange={(event) => handleImageUpload(event)} />
                 </label>
               )}
             </div>
 
-            <label className="mb-2 block text-sm font-semibold text-primary" htmlFor="product-name">Product Name</label>
+            <label className="mb-1 block text-xs font-semibold text-primary" htmlFor="product-name">Product Name</label>
             <input
               id="product-name"
               value={editingProduct.name}
               onChange={(event) => updateEditingProduct('name', event.target.value)}
-              className="mb-4 w-full rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
+              className="mb-3 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
               placeholder="Enter product name"
             />
 
-            <label className="mb-2 block text-sm font-semibold text-primary" htmlFor="product-category">Category</label>
+            <label className="mb-1 block text-xs font-semibold text-primary" htmlFor="product-category">Category</label>
             <select
               id="product-category"
               value={editingProduct.category}
               onChange={(event) => updateEditingProduct('category', event.target.value)}
-              className="mb-4 w-full rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
+              className="mb-3 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
             >
               {CATEGORIES.filter((category) => category !== 'All').map((category) => (
                 <option key={category} value={category}>{category}</option>
               ))}
             </select>
 
-            <label className="mb-2 block text-sm font-semibold text-primary" htmlFor="product-specs">Product Details</label>
+            <label className="mb-1 block text-xs font-semibold text-primary" htmlFor="product-specs">Product Details</label>
             <textarea
               id="product-specs"
               value={editingProduct.specs}
               onChange={(event) => updateEditingProduct('specs', event.target.value)}
-              rows={5}
-              className="mb-5 w-full resize-none rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
+              rows={3}
+              className="mb-3 w-full resize-none rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
               placeholder="Enter product description or specifications"
             />
 
-            {statusMessage && <p className="mb-4 rounded-md bg-surface-container-low px-4 py-3 text-sm text-primary">{statusMessage}</p>}
+            {statusMessage && <p className="mb-3 rounded-md bg-surface-container-low px-3 py-2 text-xs text-primary">{statusMessage}</p>}
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Button type="submit" className="gap-2">
-                <Save size={18} />
+            <div className="grid gap-2 sm:grid-cols-2">
+              <Button type="submit" size="sm" className="gap-2">
+                <Save size={16} />
                 Save Product
               </Button>
-              <Button type="button" variant="outline" onClick={resetCatalog}>
+              <Button type="button" size="sm" variant="outline" onClick={resetCatalog}>
                 Reset Catalog
               </Button>
             </div>
