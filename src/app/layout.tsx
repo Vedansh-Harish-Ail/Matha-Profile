@@ -8,6 +8,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Mata Refrigeration | Refrigerant Gas & HVAC Supply Experts",
   description: "Trusted supplier of refrigerant gases, compressor oils, copper pipes, and HVAC accessories in Navi Mumbai.",
+  icons: {
+    icon: "/images/mata_logo_gold.svg",
+    shortcut: "/images/mata_logo_gold.svg",
+    apple: "/images/mata_logo_gold.svg",
+  },
 };
 
 export default function RootLayout({

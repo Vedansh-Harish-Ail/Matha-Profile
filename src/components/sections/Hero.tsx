@@ -2,6 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Phone, MessageCircle, BadgeCheck, MapPin } from 'lucide-react';
 
+const brands = [
+  { name: 'Chemours', src: '/images/c.png' },
+  { name: 'Floron', src: '/images/f.png' },
+  { name: 'MPCL', src: '/images/m.png' },
+  { name: 'Mafron', src: '/images/ma.png' },
+  { name: 'Symbol', src: '/images/sy.png' },
+  { name: 'Refron', src: '/images/r.png' },
+];
+
 export default function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-[#06112C]">
@@ -88,6 +97,52 @@ export default function Hero() {
             sizes="(max-width: 1024px) 100vw, 42vw"
             className="object-cover object-center"
           />
+        </div>
+      </div>
+
+      {/* --- Brand Logos Ticker --- */}
+      <div className="relative border-y border-gray-150 bg-white py-6 pause-marquee">
+        {/* Gradient edge overlays for smooth transition/fades */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        
+        <div className="relative w-full overflow-hidden">
+          <div className="animate-marquee-ltr flex items-center">
+            {/* First Set of Logos */}
+            <div className="flex shrink-0 items-center">
+              {brands.map((brand, idx) => (
+                <div
+                  key={`brand-set1-${idx}`}
+                  className="flex h-12 w-28 md:h-16 md:w-36 items-center justify-center transition-transform duration-300 hover:scale-105 mr-6 md:mr-8"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={brand.src}
+                    alt={`${brand.name} Logo`}
+                    className="max-h-full max-w-full object-contain"
+                    style={brand.name === 'Symbol' ? { filter: 'invert(1)' } : undefined}
+                  />
+                </div>
+              ))}
+            </div>
+            {/* Second (Duplicate) Set of Logos for Infinite Loop */}
+            <div className="flex shrink-0 items-center">
+              {brands.map((brand, idx) => (
+                <div
+                  key={`brand-set2-${idx}`}
+                  className="flex h-12 w-28 md:h-16 md:w-36 items-center justify-center transition-transform duration-300 hover:scale-105 mr-6 md:mr-8"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={brand.src}
+                    alt={`${brand.name} Logo`}
+                    className="max-h-full max-w-full object-contain"
+                    style={brand.name === 'Symbol' ? { filter: 'invert(1)' } : undefined}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -6,7 +6,8 @@ import {
   Clock, 
   Send, 
   ShieldCheck, 
-  ArrowRight 
+  ArrowRight,
+  Store
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -90,9 +91,20 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-primary text-sm">Main Office & Distribution</h4>
                       <p className="text-gray-600 mt-1 text-sm leading-relaxed">
-                        Shop No -1, Plot No-91, Channel Classic,<br />
-                        HSG Society, Sector 1, Kopar Khairane,<br />
-                        Navi Mumbai, Maharashtra - 400709
+                        CHANNEL CLASSIC, HSG Society<br />
+                        Shop No -1, Plot No-91, Sector 1<br />
+                        Kopar Khairane, Navi Mumbai 400709
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Phone className="text-secondary-light shrink-0" size={20} />
+                    <div>
+                      <h4 className="font-bold text-primary text-sm">Contact Number</h4>
+                      <p className="text-gray-600 mt-1 text-sm">
+                        <a href="tel:+918080673647" className="hover:text-secondary-light font-semibold">
+                          080806 73647
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -109,15 +121,34 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Trust Card */}
-              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
-                <div className="h-8 w-8 rounded-full bg-white flex items-center justify-center shadow-sm text-secondary-light">
-                  <ShieldCheck size={16} />
+              {/* Trust Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
+                  <div className="h-8 w-8 rounded-full bg-white flex items-center justify-center shadow-sm text-secondary-light shrink-0">
+                    <ShieldCheck size={16} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-primary text-xs">GST Verified Dealer</h4>
+                    <p className="text-[10px] text-gray-500 mt-1">Registered industrial supplier compliant with safety standards.</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-primary text-xs">GST Verified Dealer</h4>
-                  <p className="text-[10px] text-gray-500 mt-1">Registered industrial supplier compliant with safety standards for refrigerant handling.</p>
-                </div>
+                <a 
+                  href="https://www.indiamart.com/matarefrigeration/profile.html" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3 hover:border-accent/40 transition-colors group"
+                >
+                  <div className="h-8 w-8 rounded-full bg-white flex items-center justify-center shadow-sm text-accent group-hover:bg-accent group-hover:text-white transition-colors shrink-0">
+                    <Store size={16} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-primary text-xs flex items-center gap-1.5">
+                      IndiaMART TrustSEAL
+                      <span className="text-[9px] font-extrabold uppercase text-accent bg-accent/10 px-1.5 py-0.5 rounded-sm">Verified</span>
+                    </h4>
+                    <p className="text-[10px] text-gray-500 mt-1 group-hover:underline">Click to view our verified seller profile.</p>
+                  </div>
+                </a>
               </div>
 
               {/* Map Placeholder with Style */}

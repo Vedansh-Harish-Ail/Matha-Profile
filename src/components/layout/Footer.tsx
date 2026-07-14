@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Phone, MessageCircle, Mail, MapPin } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Store } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -63,7 +63,7 @@ export default function Footer() {
           {/* Contact Details - Bottom grid on mobile, 4th col on desktop */}
           <div className="col-span-2 lg:col-span-1">
             <h4 className="mb-6 lg:mb-4 font-semibold text-white uppercase tracking-wider text-center md:text-left text-sm md:text-base">Contact Us</h4>
-            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-1 gap-4">
               <a href="tel:+918080673647" className="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-3 hover:text-secondary transition-colors group">
                 <Phone size={20} className="text-secondary shrink-0 lg:w-[18px] lg:h-[18px]" />
                 <span className="text-[10px] sm:text-xs lg:text-sm text-center lg:text-left">080806 73647</span>
@@ -75,6 +75,10 @@ export default function Footer() {
               <a href="mailto:info@matarefrigeration.com" className="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-3 hover:text-secondary transition-colors group">
                 <Mail size={20} className="text-secondary shrink-0 lg:w-[18px] lg:h-[18px]" />
                 <span className="text-[10px] sm:text-xs lg:text-sm text-center lg:text-left truncate max-w-full">Email Us</span>
+              </a>
+              <a href="https://www.indiamart.com/matarefrigeration/profile.html" target="_blank" rel="noopener noreferrer" className="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-3 hover:text-secondary transition-colors group">
+                <Store size={20} className="text-secondary shrink-0 lg:w-[18px] lg:h-[18px]" />
+                <span className="text-[10px] sm:text-xs lg:text-sm text-center lg:text-left">IndiaMART</span>
               </a>
             </div>
           </div>
