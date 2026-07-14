@@ -107,7 +107,7 @@ export default function Hero() {
         <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
         
         <div className="relative w-full overflow-hidden">
-          <div className="animate-marquee-ltr flex items-center">
+          <div className="animate-marquee-rtl flex items-center">
             {/* First Set of Logos */}
             <div className="flex shrink-0 items-center">
               {brands.map((brand, idx) => (

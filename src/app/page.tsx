@@ -1,4 +1,4 @@
-import { ShieldCheck, Truck, MessageCircle, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Truck, MessageCircle, ArrowRight, Star, MapPin } from 'lucide-react';
 import Hero from '@/components/sections/Hero';
 import Link from 'next/link';
 
@@ -8,25 +8,57 @@ export default function Home() {
       <Hero />
       
       {/* Trust Strip */}
-      <section className="bg-primary py-8 text-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-8 text-center md:justify-between">
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold">5.0</span>
-              <span className="text-xs uppercase tracking-wider text-secondary-light">Google Rating</span>
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#030816] via-[#06112C] to-[#030816] py-8 text-white border-b border-white/5">
+        {/* Decorative subtle grid background */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            
+            {/* Item 1 - Google Rating */}
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.01] border border-white/[0.03] hover:bg-white/[0.03] hover:border-white/[0.08] hover:shadow-lg hover:shadow-yellow-500/5 transition-all duration-300 group">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-yellow-500/10 text-yellow-500 group-hover:scale-110 transition-transform">
+                <Star size={24} className="fill-yellow-500" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg md:text-xl font-extrabold tracking-tight text-white leading-tight">5.0 Google Rating</span>
+                <span className="text-[10px] uppercase tracking-widest text-[#A0B4CC] mt-0.5">Verified Reviews</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold">GST</span>
-              <span className="text-xs uppercase tracking-wider text-secondary-light">Verified Business</span>
+
+            {/* Item 2 - GST Verified */}
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.01] border border-white/[0.03] hover:bg-white/[0.03] hover:border-white/[0.08] hover:shadow-lg hover:shadow-secondary-light/5 transition-all duration-300 group">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary-light/10 text-secondary-light group-hover:scale-110 transition-transform">
+                <ShieldCheck size={24} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg md:text-xl font-extrabold tracking-tight text-white leading-tight">GST Verified</span>
+                <span className="text-[10px] uppercase tracking-widest text-[#A0B4CC] mt-0.5">Tax Compliant</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold">BULK</span>
-              <span className="text-xs uppercase tracking-wider text-secondary-light">Supply Support</span>
+
+            {/* Item 3 - Bulk Supply */}
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.01] border border-white/[0.03] hover:bg-white/[0.03] hover:border-white/[0.08] hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 group">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform">
+                <Truck size={24} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg md:text-xl font-extrabold tracking-tight text-white leading-tight">Bulk Support</span>
+                <span className="text-[10px] uppercase tracking-widest text-[#A0B4CC] mt-0.5">Wholesale Supply</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold">NAVI MUMBAI</span>
-              <span className="text-xs uppercase tracking-wider text-secondary-light">Local Dealer</span>
+
+            {/* Item 4 - Local Dealer */}
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.01] border border-white/[0.03] hover:bg-white/[0.03] hover:border-white/[0.08] hover:shadow-lg hover:shadow-secondary-light/5 transition-all duration-300 group">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary-light/10 text-secondary-light group-hover:scale-110 transition-transform">
+                <MapPin size={24} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg md:text-xl font-extrabold tracking-tight text-white leading-tight">Navi Mumbai</span>
+                <span className="text-[10px] uppercase tracking-widest text-[#A0B4CC] mt-0.5">Local Distribution</span>
+              </div>
             </div>
+
           </div>
         </div>
       </section>

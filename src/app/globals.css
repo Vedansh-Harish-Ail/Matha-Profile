@@ -34,16 +34,16 @@ body {
     animation: pulse-slow 4s ease-in-out infinite;
   }
   
-  @keyframes marquee-ltr {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0%); }
+  @keyframes marquee-rtl {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
   }
-  .animate-marquee-ltr {
+  .animate-marquee-rtl {
     display: flex;
     width: max-content;
-    animation: marquee-ltr 25s linear infinite;
+    animation: marquee-rtl 25s linear infinite;
   }
-  .pause-marquee:hover .animate-marquee-ltr {
+  .pause-marquee:hover .animate-marquee-rtl {
     animation-play-state: paused;
   }
 }
