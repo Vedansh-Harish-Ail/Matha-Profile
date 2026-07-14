@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/Button';
 import { CATEGORIES, DEFAULT_PRODUCTS, readProducts, saveProducts, type Product } from '@/lib/products';
-import { ImagePlus, LogOut, Pencil, Plus, Save, Search, ShieldCheck, X } from 'lucide-react';
+import { ImagePlus, LogOut, Pencil, Plus, Save, Search, ShieldCheck, Trash2, X } from 'lucide-react';
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 
 const emptyProduct: Product = {
@@ -144,6 +144,17 @@ export default function AdminDashboard() {
     event.target.value = '';
   };
 
+  const handleRemoveImage = (productId: string) => {
+    const nextProducts = products.map((product) => (
+      product.id === productId ? { ...product, image: '' } : product
+    ));
+    persistProducts(nextProducts, 'Photo removed from product.');
+
+    if (editingProduct.id === productId) {
+      setEditingProduct((currentProduct) => ({ ...currentProduct, image: '' }));
+    }
+  };
+
   const handleSaveProduct = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -279,11 +290,29 @@ export default function AdminDashboard() {
                 </div>
               )}
             </div>
-            <label className="flex cursor-pointer items-center justify-center gap-2 border-t border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-primary hover:bg-gray-50">
-              <ImagePlus size={16} />
-              Upload Photo
-              <input type="file" accept="image/*" className="hidden" onChange={(event) => handleImageUpload(event)} />
-            </label>
+            {editingProduct.image ? (
+              <div className="grid grid-cols-2 border-t border-gray-200 divide-x divide-gray-200">
+                <label className="flex cursor-pointer items-center justify-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-primary hover:bg-gray-50">
+                  <ImagePlus size={16} />
+                  Upload Photo
+                  <input type="file" accept="image/*" className="hidden" onChange={(event) => handleImageUpload(event)} />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => updateEditingProduct('image', '')}
+                  className="flex items-center justify-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-red-600 hover:bg-red-50 transition-colors"
+                >
+                  <Trash2 size={16} />
+                  Remove
+                </button>
+              </div>
+            ) : (
+              <label className="flex cursor-pointer items-center justify-center gap-2 border-t border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-primary hover:bg-gray-50">
+                <ImagePlus size={16} />
+                Upload Photo
+                <input type="file" accept="image/*" className="hidden" onChange={(event) => handleImageUpload(event)} />
+              </label>
+            )}
           </div>
 
           <label className="mb-2 block text-sm font-semibold text-primary" htmlFor="product-name">Product Name</label>
@@ -347,13 +376,23 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4">
             {filteredProducts.map((product) => (
               <article key={product.id} className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-gray-100 text-gray-400">
+                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gray-100 text-gray-400">
                   {product.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(product.id)}
+                        className="absolute right-2 top-2 rounded-full bg-white/95 p-1.5 text-red-600 shadow-sm border border-gray-100 hover:bg-red-50 hover:text-red-700 transition-colors"
+                        title="Remove photo"
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    </>
                   ) : (
                     <span className="text-sm italic">No photo</span>
                   )}

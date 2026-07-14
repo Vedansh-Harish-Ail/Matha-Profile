@@ -91,7 +91,7 @@ export default function ProductsPage() {
               </div>
 
               {filteredProducts.length > 0 ? (
-                <div className="grid grid-cols-2 gap-2 md:gap-6 lg:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-2 gap-2 md:gap-6 md:grid-cols-3 xl:grid-cols-4">
                   {filteredProducts.map((product) => (
                     <div key={product.id} className="group flex flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md">
                       <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden text-gray-400">
