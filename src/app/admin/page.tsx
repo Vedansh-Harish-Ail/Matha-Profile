@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
-import { CATEGORIES, DEFAULT_PRODUCTS, readProducts, saveProducts, type Product } from '@/lib/products';
+import { CATEGORIES, DEFAULT_PRODUCTS, readProducts, saveProducts, PRODUCT_STORAGE_KEY, type Product } from '@/lib/products';
 import { ImagePlus, LogOut, Pencil, Plus, Save, Search, ShieldCheck, Trash2, X } from 'lucide-react';
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 
@@ -44,9 +44,22 @@ export default function AdminDashboard() {
       }
     };
 
+    const loadProducts = () => setProducts(readProducts());
+
     syncAuth();
-    setProducts(readProducts());
+    loadProducts();
     window.addEventListener('mata-admin-auth', syncAuth);
+
+    // Sync from server JSON file
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          window.localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(data));
+          loadProducts();
+        }
+      })
+      .catch((err) => console.error('Error fetching products from server:', err));
 
     return () => {
       window.removeEventListener('mata-admin-auth', syncAuth);
@@ -66,6 +79,13 @@ export default function AdminDashboard() {
     setProducts(nextProducts);
     saveProducts(nextProducts);
     setStatusMessage(message);
+
+    // Sync to server JSON file
+    fetch('/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(nextProducts),
+    }).catch((err) => console.error('Failed to sync products to server:', err));
   };
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
