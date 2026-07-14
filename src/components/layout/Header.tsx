@@ -88,8 +88,16 @@ export default function Header() {
 
       {/* Main navigation */}
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" className="text-xl font-bold text-[#06112C] md:text-2xl">
-          MATA REFRIGERATION
+        <Link href="/" className="flex items-center gap-2 md:gap-3 transition-transform active:scale-95">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/mata_logo_gold.svg"
+            alt="Mata Refrigeration Logo"
+            className="h-9 w-9 md:h-12 md:w-12 object-contain"
+          />
+          <span className="text-base font-black tracking-tight text-[#06112C] md:text-xl uppercase">
+            Mata <span className="text-accent">Refrigeration</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}

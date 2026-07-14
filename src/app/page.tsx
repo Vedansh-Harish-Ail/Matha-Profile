@@ -131,6 +131,39 @@ export default function Home() {
         </div>
       </section>
       
+      {/* Brand Banner Section */}
+      <section className="py-12 bg-white w-full">
+        <div className="container mx-auto px-4">
+          <div className="relative w-full rounded-3xl overflow-hidden bg-[#06112C] py-10 px-6 md:px-12 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 shadow-2xl border border-secondary/20">
+            {/* Background Sparkles/Stars Decoration */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]" />
+            
+            {/* Gold Seal Logo */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/images/mata_logo_gold.svg" 
+              alt="Mata Refrigeration Gold Logo" 
+              className="relative z-10 h-32 w-32 md:h-48 md:w-48 object-contain drop-shadow-[0_8px_24px_rgba(255,167,81,0.3)] shrink-0 animate-pulse-slow"
+              style={{ animationDuration: '4s' }}
+            />
+            
+            {/* Text and Tagline */}
+            <div className="relative z-10 text-center md:text-left flex flex-col justify-center">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-none text-white uppercase font-sans">
+                Mata<br className="md:hidden" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE259] to-[#FFA751]">Refrigeration</span>
+              </h2>
+              
+              {/* Tagline with arrows */}
+              <div className="mt-4 flex items-center justify-center md:justify-start gap-2 text-xs sm:text-sm md:text-lg font-bold text-gray-300 tracking-wider">
+                <span className="text-accent text-lg">→</span>
+                <span>Your Trusted Partner for Refrigeration &amp; Cooling Solutions</span>
+                <span className="text-accent text-lg">←</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* CTA Section */}
       <section className="bg-primary py-20 text-white relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">

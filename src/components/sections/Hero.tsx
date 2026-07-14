@@ -11,12 +11,23 @@ export default function Hero() {
         {/* ---- LEFT: Content Pane ---- */}
         <div className="relative z-10 flex w-full flex-col justify-center px-6 py-14 sm:px-10 lg:w-[58%] lg:px-16 lg:py-20">
 
-          {/* Badge */}
-          <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-sm bg-[#1FAB89] px-3 py-1">
-            <BadgeCheck size={13} className="text-white" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-white">
-              Authorized Industrial Dealer
-            </span>
+          <div className="flex items-center gap-4 mb-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/mata_logo_gold.svg"
+              alt="Mata Refrigeration Logo"
+              className="h-16 w-16 md:h-20 md:w-20 object-contain drop-shadow-[0_4px_12px_rgba(255,167,81,0.2)] animate-pulse-slow"
+              style={{ animationDuration: '3s' }}
+            />
+            <div>
+              <div className="inline-flex w-fit items-center gap-2 rounded-sm bg-[#1FAB89] px-3 py-1 mb-1">
+                <BadgeCheck size={13} className="text-white" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-white">
+                  Authorized Industrial Dealer
+                </span>
+              </div>
+              <p className="text-[10px] sm:text-xs font-semibold text-accent uppercase tracking-widest">Navi Mumbai's Leading Distributor</p>
+            </div>
           </div>
 
           {/* Headline */}

@@ -10,7 +10,17 @@ export default function Footer() {
           
           {/* Company Info - Full width on mobile, 1st col on desktop */}
           <div className="col-span-2 lg:col-span-1 text-center md:text-left">
-            <h3 className="mb-4 text-xl font-bold text-white">Mata Refrigeration</h3>
+            <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/mata_logo_gold.svg"
+                alt="Mata Refrigeration Logo"
+                className="h-8 w-8 object-contain"
+              />
+              <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                Mata <span className="text-accent">Refrigeration</span>
+              </h3>
+            </div>
             <p className="mb-6 text-sm leading-relaxed mx-auto md:mx-0 max-w-sm lg:max-w-none">
               Trusted supplier of refrigerant gases, compressor oils, copper pipes, and HVAC accessories in Navi Mumbai.
             </p>
