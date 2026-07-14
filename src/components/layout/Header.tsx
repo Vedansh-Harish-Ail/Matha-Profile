@@ -72,7 +72,7 @@ export default function Header() {
           <div className="flex space-x-4">
             <a href="tel:+918080673647" className="flex items-center space-x-1 hover:text-secondary-light">
               <Phone size={14} />
-              <span>+91 80806 73647</span>
+              <span>080806 73647</span>
             </a>
             <a href="https://wa.me/918080673647" className="flex items-center space-x-1 hover:text-secondary-light">
               <MessageCircle size={14} />
@@ -228,7 +228,7 @@ export default function Header() {
               <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Direct Contact</p>
               <a href="tel:+918080673647" className="flex items-center gap-4 text-gray-700 font-bold text-lg">
                 <div className="bg-primary/10 p-3 rounded-full text-primary"><Phone size={24} /></div>
-                +91 80806 73647
+                080806 73647
               </a>
               <a href="https://wa.me/918080673647" className="flex items-center gap-4 text-gray-700 font-bold text-lg">
                 <div className="bg-green-50 p-3 rounded-full text-green-600"><MessageCircle size={24} /></div>

@@ -43,7 +43,7 @@ export default function ContactPage() {
               <h3 className="font-heading text-lg font-bold mb-1">Call Experts</h3>
               <p className="text-xs text-gray-500 mb-3">Direct line for technical specs & pricing.</p>
               <a href="tel:+918080673647" className="text-md font-bold text-primary hover:text-secondary-light flex items-center gap-2">
-                +91 80806 73647
+                080806 73647
                 <ArrowRight size={14} />
               </a>
             </div>

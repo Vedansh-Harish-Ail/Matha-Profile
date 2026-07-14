@@ -157,7 +157,7 @@ export default function ProductsPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-6 text-2xl font-bold text-primary">Looking for Bulk Orders?</h2>
           <p className="mb-8 text-gray-600">Get specialized wholesale pricing for large quantities and long-term supply contracts.</p>
-          <Link href="/quote">
+          <Link href="/contact">
             <Button size="lg" variant="primary">
               Request Bulk Quote
             </Button>

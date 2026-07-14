@@ -16,8 +16,12 @@ export default function Footer() {
             </p>
             <div className="flex flex-col items-center md:items-start space-y-2 text-sm">
               <div className="flex flex-col md:flex-row items-center md:items-start space-y-2 md:space-y-0 md:space-x-3 text-center md:text-left">
-                <MapPin size={18} className="text-secondary shrink-0" />
-                <span className="max-w-[250px] md:max-w-none">Shop No -1, Plot No-91, Channel Classic, HSG Society, Sector 1, Kopar Khairane, Navi Mumbai - 400709</span>
+                <MapPin size={18} className="text-secondary shrink-0 mt-1" />
+                <span className="max-w-[250px] md:max-w-none">
+                  CHANNEL CLASSIC, HSG Society<br />
+                  Shop No -1, Plot No-91, Sector 1<br />
+                  Kopar Khairane, Navi Mumbai 400709
+                </span>
               </div>
             </div>
           </div>
@@ -30,7 +34,7 @@ export default function Footer() {
               <li><Link href="/products" className="hover:text-secondary transition-colors">All Products</Link></li>
               <li><Link href="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="hover:text-secondary transition-colors">Contact Us</Link></li>
-              <li><Link href="/quote" className="hover:text-secondary transition-colors">Request a Quote</Link></li>
+              <li><Link href="/contact" className="hover:text-secondary transition-colors">Request a Quote</Link></li>
             </ul>
           </div>
 
@@ -52,7 +56,7 @@ export default function Footer() {
             <div className="grid grid-cols-3 lg:grid-cols-1 gap-4">
               <a href="tel:+918080673647" className="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-3 hover:text-secondary transition-colors group">
                 <Phone size={20} className="text-secondary shrink-0 lg:w-[18px] lg:h-[18px]" />
-                <span className="text-[10px] sm:text-xs lg:text-sm text-center lg:text-left">+91 80806 73647</span>
+                <span className="text-[10px] sm:text-xs lg:text-sm text-center lg:text-left">080806 73647</span>
               </a>
               <a href="https://wa.me/918080673647" className="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-3 hover:text-secondary transition-colors group">
                 <MessageCircle size={20} className="text-secondary shrink-0 lg:w-[18px] lg:h-[18px]" />

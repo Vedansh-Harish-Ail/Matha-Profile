@@ -20,7 +20,7 @@ export default function MobileActionBar() {
       </a>
       
       <a 
-        href="/quote" 
+        href="/contact" 
         className="flex flex-1 flex-col items-center justify-center py-3 text-accent hover:bg-gray-50"
       >
         <FileText size={20} />

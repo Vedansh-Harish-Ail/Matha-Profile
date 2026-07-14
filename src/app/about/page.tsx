@@ -20,7 +20,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col text-primary font-sans bg-surface-bright">
       {/* --- Hero Section --- */}
-      <section className="relative flex h-[400px] items-center overflow-hidden w-full bg-primary-dark">
+      <section className="relative flex h-[420px] md:h-[480px] items-center overflow-hidden w-full bg-primary-dark pb-16 md:pb-24">
         <div className="absolute inset-0 z-0">
           <Image 
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC37i-8XdrQj4Ji82pMNwwyko2D5XCUWuKcGFfL6CvtGaJnrDtdoTcq_IQzFyK13O3XtJ_0m3mNcyPqkwB-nAFc4-lBlJPerM0ciTsZ0sMN8Y5ha-TPzugwgS-3fnEFqZICPXRiot_-O47TRZVJWF5rHimb8obkf1xCeR9qkd-MCHn8mKwisABxuOyp3ZplRryQKpaB4N6gQrD7RR3_DGE1-HZSssrfkOlnTFVb5nBLQ7U3FcraQkz7UVw-Rbz6o8FOR8fLCXk6v8E"
@@ -44,6 +44,12 @@ export default function AboutPage() {
               We connect industrial requirements with top-tier HVAC solutions, serving Maharashtra's cold chains and engineering projects with uncompromising quality since 1989.
             </p>
           </div>
+        </div>
+        {/* Curved divider to match requested wavy shape */}
+        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[60px] md:h-[100px] fill-[#f8f9ff]">
+            <path d="M0,60 C300,140 600,0 900,30 C1050,45 1150,95 1200,90 L1200,120 L0,120 Z"></path>
+          </svg>
         </div>
       </section>
 
@@ -215,7 +221,7 @@ export default function AboutPage() {
             <p className="text-lg text-white/70">Get specialized volume pricing and technical consultation for your commercial and industrial cooling setups.</p>
           </div>
           <Link 
-            href="/quote"
+            href="/contact"
             className="bg-accent hover:bg-accent-dark text-white font-bold h-14 px-10 rounded-full transition-all flex items-center gap-3 whitespace-nowrap active:scale-95 relative z-10 shadow-lg"
           >
             REQUEST A QUOTE
