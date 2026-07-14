@@ -6,7 +6,6 @@ import { Phone, MessageCircle, MapPin, Menu, X, ShieldCheck, LogOut } from 'luci
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
-const ADMIN_AUTH_KEY = 'mata-admin-auth';
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,17 +14,21 @@ export default function Header() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   useEffect(() => {
-    const syncAdminAuth = () => {
-      setIsAdminLoggedIn(window.localStorage.getItem(ADMIN_AUTH_KEY) === 'true');
+    const syncAdminAuth = async () => {
+      try {
+        const response = await fetch('/api/admin/session', { cache: 'no-store' });
+        const data = await response.json();
+        setIsAdminLoggedIn(Boolean(data.authenticated));
+      } catch {
+        setIsAdminLoggedIn(false);
+      }
     };
 
     syncAdminAuth();
     window.addEventListener('mata-admin-auth', syncAdminAuth);
-    window.addEventListener('storage', syncAdminAuth);
 
     return () => {
       window.removeEventListener('mata-admin-auth', syncAdminAuth);
-      window.removeEventListener('storage', syncAdminAuth);
     };
   }, []);
 
@@ -46,8 +49,8 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
-  const handleLogout = () => {
-    window.localStorage.removeItem(ADMIN_AUTH_KEY);
+  const handleLogout = async () => {
+    await fetch('/api/admin/logout', { method: 'POST' });
     window.dispatchEvent(new Event('mata-admin-auth'));
     setIsAdminLoggedIn(false);
     setIsMenuOpen(false);
@@ -238,3 +241,5 @@ export default function Header() {
     </header>
   );
 }
+
+

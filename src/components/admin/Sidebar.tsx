@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { LayoutDashboard, LogOut } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Products', href: '/admin' },
@@ -11,13 +11,6 @@ const menuItems = [
 
 export const AdminSidebar = () => {
   const pathname = usePathname();
-  const router = useRouter();
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('mata-admin-auth');
-    window.dispatchEvent(new Event('mata-admin-auth'));
-    router.push('/admin');
-  };
 
   return (
     <aside className="hidden h-screen w-64 flex-col border-r border-white/20 bg-white/70 p-6 shadow-sm backdrop-blur-deep md:flex">
@@ -46,14 +39,6 @@ export const AdminSidebar = () => {
           })}
         </ul>
       </nav>
-      <div className="mt-auto">
-        <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-lg p-3 text-red-500 transition-colors hover:bg-red-50">
-          <LogOut size={20} />
-          <span>Logout</span>
-        </button>
-      </div>
     </aside>
   );
 };
-
-

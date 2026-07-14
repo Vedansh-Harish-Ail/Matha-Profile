@@ -5,10 +5,6 @@ import { CATEGORIES, DEFAULT_PRODUCTS, readProducts, saveProducts, type Product 
 import { ImagePlus, LogOut, Pencil, Plus, Save, Search, ShieldCheck, X } from 'lucide-react';
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 
-const ADMIN_EMAIL = 'admin@gmail.com';
-const ADMIN_PASSWORD = 'admin@123';
-const ADMIN_AUTH_KEY = 'mata-admin-auth';
-
 const emptyProduct: Product = {
   id: '',
   name: '',
@@ -38,18 +34,22 @@ export default function AdminDashboard() {
   const [statusMessage, setStatusMessage] = useState('');
 
   useEffect(() => {
-    const syncAuth = () => {
-      setIsAuthenticated(window.localStorage.getItem(ADMIN_AUTH_KEY) === 'true');
+    const syncAuth = async () => {
+      try {
+        const response = await fetch('/api/admin/session', { cache: 'no-store' });
+        const data = await response.json();
+        setIsAuthenticated(Boolean(data.authenticated));
+      } catch {
+        setIsAuthenticated(false);
+      }
     };
 
     syncAuth();
     setProducts(readProducts());
     window.addEventListener('mata-admin-auth', syncAuth);
-    window.addEventListener('storage', syncAuth);
 
     return () => {
       window.removeEventListener('mata-admin-auth', syncAuth);
-      window.removeEventListener('storage', syncAuth);
     };
   }, []);
 
@@ -68,23 +68,30 @@ export default function AdminDashboard() {
     setStatusMessage(message);
   };
 
-  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoginError('');
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      window.localStorage.setItem(ADMIN_AUTH_KEY, 'true');
+    const response = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json().catch(() => ({ message: 'Login failed.' }));
+
+    if (response.ok) {
       window.dispatchEvent(new Event('mata-admin-auth'));
       setIsAuthenticated(true);
-      setLoginError('');
+      setPassword('');
       setProducts(readProducts());
       return;
     }
 
-    setLoginError('Invalid admin email or password.');
+    setLoginError(data.message || 'Invalid admin email or password.');
   };
 
-  const handleLogout = () => {
-    window.localStorage.removeItem(ADMIN_AUTH_KEY);
+  const handleLogout = async () => {
+    await fetch('/api/admin/logout', { method: 'POST' });
     window.dispatchEvent(new Event('mata-admin-auth'));
     setIsAuthenticated(false);
     setEmail('');
@@ -187,7 +194,8 @@ export default function AdminDashboard() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             className="mb-4 w-full rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
-            placeholder="admin@gmail.com"
+            placeholder="Admin email"
+            autoComplete="username"
           />
 
           <label className="mb-2 block text-sm font-semibold text-primary" htmlFor="admin-password">Password</label>
@@ -197,7 +205,8 @@ export default function AdminDashboard() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             className="mb-4 w-full rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
-            placeholder="admin@123"
+            placeholder="Admin password"
+            autoComplete="current-password"
           />
 
           {loginError && <p className="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-600">{loginError}</p>}
@@ -239,8 +248,8 @@ export default function AdminDashboard() {
           <p className="mt-2 text-3xl font-bold text-primary">{productsWithPhotos}</p>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-gray-500">Login Email</p>
-          <p className="mt-2 text-lg font-bold text-primary">{ADMIN_EMAIL}</p>
+          <p className="text-sm text-gray-500">Session Security</p>
+          <p className="mt-2 text-lg font-bold text-primary">Server cookie</p>
         </div>
       </div>
 
@@ -375,4 +384,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
