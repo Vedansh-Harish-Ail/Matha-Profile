@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
-import { CATEGORIES, readProducts, type Product } from '@/lib/products';
+import { CATEGORIES, readProducts, PRODUCT_STORAGE_KEY, type Product } from '@/lib/products';
 import { MessageCircle, Filter, Search } from 'lucide-react';
 import { useEffect, useState, useMemo } from 'react';
 
@@ -17,6 +17,17 @@ export default function ProductsPage() {
     loadProducts();
     window.addEventListener('mata-products-updated', loadProducts);
     window.addEventListener('storage', loadProducts);
+
+    // Sync from server JSON file
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          window.localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(data));
+          loadProducts();
+        }
+      })
+      .catch((err) => console.error('Error fetching products from server:', err));
 
     return () => {
       window.removeEventListener('mata-products-updated', loadProducts);
